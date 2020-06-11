@@ -20,8 +20,10 @@
 		$captcha = $mysqli->real_escape_string($_POST['g-recaptcha-response']);
 		
 		$activo = 0;
-		$tipo_usuario = $_ENV['TIPO_DE_USUARIO']; 
-		$secret = $_ENV['CLAVE_SECRETA_RECAPTCHA']; 
+		//$tipo_usuario = $_ENV['TIPO_DE_USUARIO']; 
+		//$secret = $_ENV['CLAVE_SECRETA_RECAPTCHA']; 
+		$tipo_usuario = getenv('TIPO_DE_USUARIO'); 
+		$secret = getenv('CLAVE_SECRETA_RECAPTCHA'); 
 		
 		
 		if(!$captcha){

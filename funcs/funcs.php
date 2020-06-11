@@ -133,8 +133,10 @@ use PHPMailer\PHPMailer\PHPMailer;
 		$mail->Port = 587;
 		$mail->SMTPSecure = 'tls';
 		$mail->SMTPAuth = true;
-		$mail->Username = $_ENV['GMAIL_USER']; 
-		$mail->Password = $_ENV['GMAIL_PASSWORD'];
+		//$mail->Username = $_ENV['GMAIL_USER']; 
+		//$mail->Password = $_ENV['GMAIL_PASSWORD'];
+		$mail->Username = getenv('GMAIL_USER'); 
+		$mail->Password = getenv('GMAIL_PASSWORD');
 		$mail->setFrom('dev.chrisweb@gmail.com', 'Christian Castillo '); //Modificar
 		$mail->addAddress($email, $nombre);
 		$mail->Subject = $asunto;
