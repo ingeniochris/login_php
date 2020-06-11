@@ -9,7 +9,7 @@ $password = $url["pass"];
 $db = substr($url["path"], 1);
 
 $conn = new mysqli($server, $username, $password, $db);
-if(isset($conn)){
+if(!isset($conn)){
 	echo 'Conexión Fallida en db : ', mysqli_connect_error();
 	
 }
