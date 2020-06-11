@@ -1,4 +1,5 @@
 <?php
+session_start();
 	//require 'vendor/autoload.php';
 	require 'funcs/conexion.php';
 	require 'funcs/funcs.php';
