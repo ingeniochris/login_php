@@ -72,7 +72,7 @@
 				if($registro > 0 )
 				{
 					
-					$url = 'http://'.$_SERVER["SERVER_NAME"].'/login/activar.php?id='.$registro.'&val='.$token;
+					$url = 'http://'.$_SERVER["SERVER_NAME"].'/activar.php?id='.$registro.'&val='.$token;
 					
 					$asunto = 'Activar Cuenta - Sistema de Usuarios';
 					$cuerpo = "Estimado $nombre: Para continuar con el proceso de registro, es indispensable de click en la siguiente link $url Activar Cuenta";
