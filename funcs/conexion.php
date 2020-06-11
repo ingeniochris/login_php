@@ -2,7 +2,7 @@
 require 'vendor/autoload.php';
 
 
-$url = parse_url($_ENV["CLEARDB_DATABASE_URL"]);
+$url = parse_url($_SERVER["CLEARDB_DATABASE_URL"]);
 
 $server = $url["host"];
 $username = $url["user"];
