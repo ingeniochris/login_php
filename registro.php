@@ -1,12 +1,12 @@
 <?php
 
-	require 'vendor/autoload.php';
+	//require 'vendor/autoload.php';
 	require 'funcs/conexion.php';
 	require 'funcs/funcs.php';
 	
 	//Se agregan para cargar las variables globales leidas del archivo .env
-	$dotenv = Dotenv \ Dotenv :: createImmutable (__DIR__);
-	$dotenv -> load ();
+	//$dotenv = Dotenv \ Dotenv :: createImmutable (__DIR__);
+	//$dotenv -> load ();
 
 	$errors = array();
 	
