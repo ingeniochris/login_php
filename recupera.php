@@ -29,16 +29,9 @@ require 'funcs/funcs.php';
 			} else {
 				$errors[] = "Error al enviar Email";
 			}
-		}*/
+		}
 
-		
-		
-
-		
-
-		
-
-	}
+}*/
 	
 ?>
 <html>

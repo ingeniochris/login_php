@@ -1,6 +1,13 @@
 <?php
+
+require 'vendor/autoload.php';
+
+
+
 session_start();
-/*$url = parse_url($_ENV["CLEARDB_DATABASE_URL"]);
+/*
+$dbUrl=$_ENV["CLEARDB_DATABASE_URL"];
+$url = parse_url($dbUr);
 
 $server = $url["host"];
 $username = $url["user"];
