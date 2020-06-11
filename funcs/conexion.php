@@ -1,8 +1,9 @@
 <?php
 require 'vendor/autoload.php';
-session_start();
+$dotenv = Dotenv \ Dotenv :: createImmutable (__DIR__);
+$dotenv -> load ();
 
-$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+$url = parse_url($_ENV["CLEARDB_DATABASE_URL"]);
 
 $server = $url["host"];
 $username = $url["user"];
