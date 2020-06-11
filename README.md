@@ -1,5 +1,4 @@
 # Proyecto Login PHP-Mysql
-Dra. Nancy Patricia Flores Azcanio, Ing. Jesus Christian Castillo Lozano.  
 
 Maestría en Tecnologías de la Información y Comunicaciones.
 
