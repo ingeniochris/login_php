@@ -8,8 +8,8 @@
 
 	if(!empty($_POST))
 	{
-		$usuario = $mysqli->real_escape_string($_POST['usuario']);
-		$password = $mysqli->real_escape_string($_POST['password']);
+		$usuario = $conn->real_escape_string($_POST['usuario']);
+		$password = $conn->real_escape_string($_POST['password']);
 	
 		
 			$login = login($usuario, $password);

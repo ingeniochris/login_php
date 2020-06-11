@@ -45,9 +45,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 	
 	function usuarioExiste($usuario)
 	{
-		global $mysqli;
+		global $conn;
 		
-		$stmt = $mysqli->prepare("SELECT id FROM usuarios WHERE usuario = ? LIMIT 1");
+		$stmt = $conn->prepare("SELECT id FROM usuarios WHERE usuario = ? LIMIT 1");
 		$stmt->bind_param("s", $usuario);
 		$stmt->execute();
 		$stmt->store_result();
@@ -63,9 +63,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 	
 	function emailExiste($email)
 	{
-		global $mysqli;
+		global $conn;
 		
-		$stmt = $mysqli->prepare("SELECT id FROM usuarios WHERE correo = ? LIMIT 1");
+		$stmt = $conn->prepare("SELECT id FROM usuarios WHERE correo = ? LIMIT 1");
 		$stmt->bind_param("s", $email);
 		$stmt->execute();
 		$stmt->store_result();
@@ -108,13 +108,13 @@ use PHPMailer\PHPMailer\PHPMailer;
 	
 	function registraUsuario($usuario, $pass_hash, $nombre, $email, $activo, $token, $tipo_usuario){
 		
-		global $mysqli;
+		global $conn;
 		
-		$stmt = $mysqli->prepare("INSERT INTO usuarios (usuario, password, nombre, correo, activacion, token, id_tipo) VALUES(?,?,?,?,?,?,?)");
+		$stmt = $conn->prepare("INSERT INTO usuarios (usuario, password, nombre, correo, activacion, token, id_tipo) VALUES(?,?,?,?,?,?,?)");
 		$stmt->bind_param('ssssisi', $usuario, $pass_hash, $nombre, $email, $activo, $token, $tipo_usuario);
 		
 		if ($stmt->execute()){
-			return $mysqli->insert_id;
+			return $conn->insert_id;
 			} else {
 			return 0;	
 		}		
@@ -151,9 +151,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 	}
 	
 	function validaIdToken($id, $token){
-		global $mysqli;
+		global $conn;
 		
-		$stmt = $mysqli->prepare("SELECT activacion FROM usuarios WHERE id = ? AND token = ? LIMIT 1");
+		$stmt = $conn->prepare("SELECT activacion FROM usuarios WHERE id = ? AND token = ? LIMIT 1");
 		$stmt->bind_param("is", $id, $token);
 		$stmt->execute();
 		$stmt->store_result();
@@ -180,9 +180,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 	
 	function activarUsuario($id)
 	{
-		global $mysqli;
+		global $conn;
 		
-		$stmt = $mysqli->prepare("UPDATE usuarios SET activacion=1 WHERE id = ?");
+		$stmt = $conn->prepare("UPDATE usuarios SET activacion=1 WHERE id = ?");
 		$stmt->bind_param('s', $id);
 		$result = $stmt->execute();
 		$stmt->close();
@@ -202,9 +202,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 	
 	function login($usuario, $password)
 	{
-		global $mysqli;
+		global $conn;
 		
-		$stmt = $mysqli->prepare("SELECT id, id_tipo, password FROM usuarios WHERE usuario = ? || correo = ? LIMIT 1");
+		$stmt = $conn->prepare("SELECT id, id_tipo, password FROM usuarios WHERE usuario = ? || correo = ? LIMIT 1");
 		$stmt->bind_param("ss", $usuario, $usuario);
 		$stmt->execute();
 		$stmt->store_result();
@@ -242,9 +242,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 	
 	function lastSession($id)
 	{
-		global $mysqli;
+		global $conn;
 		
-		$stmt = $mysqli->prepare("UPDATE usuarios SET last_session=NOW(), token_password='', password_request=0 WHERE id = ?");
+		$stmt = $conn->prepare("UPDATE usuarios SET last_session=NOW(), token_password='', password_request=0 WHERE id = ?");
 		$stmt->bind_param('s', $id);
 		$stmt->execute();
 		$stmt->close();
@@ -252,9 +252,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 	
 	function isActivo($usuario)
 	{
-		global $mysqli;
+		global $conn;
 		
-		$stmt = $mysqli->prepare("SELECT activacion FROM usuarios WHERE usuario = ? || correo = ? LIMIT 1");
+		$stmt = $conn->prepare("SELECT activacion FROM usuarios WHERE usuario = ? || correo = ? LIMIT 1");
 		$stmt->bind_param('ss', $usuario, $usuario);
 		$stmt->execute();
 		$stmt->bind_result($activacion);
@@ -272,11 +272,11 @@ use PHPMailer\PHPMailer\PHPMailer;
 	
 	function generaTokenPass($user_id)
 	{
-		global $mysqli;
+		global $conn;
 		
 		$token = generateToken();
 		
-		$stmt = $mysqli->prepare("UPDATE usuarios SET token_password=?, password_request=1 WHERE id = ?");
+		$stmt = $conn->prepare("UPDATE usuarios SET token_password=?, password_request=1 WHERE id = ?");
 		$stmt->bind_param('ss', $token, $user_id);
 		$stmt->execute();
 		$stmt->close();
@@ -286,9 +286,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 	
 	function getValor($campo, $campoWhere, $valor)
 	{
-		global $mysqli;
+		global $conn;
 		
-		$stmt = $mysqli->prepare("SELECT $campo FROM usuarios WHERE $campoWhere = ? LIMIT 1");
+		$stmt = $conn->prepare("SELECT $campo FROM usuarios WHERE $campoWhere = ? LIMIT 1");
 		$stmt->bind_param('s', $valor);
 		$stmt->execute();
 		$stmt->store_result();
@@ -308,9 +308,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 	
 	function getPasswordRequest($id)
 	{
-		global $mysqli;
+		global $conn;
 		
-		$stmt = $mysqli->prepare("SELECT password_request FROM usuarios WHERE id = ?");
+		$stmt = $conn->prepare("SELECT password_request FROM usuarios WHERE id = ?");
 		$stmt->bind_param('i', $id);
 		$stmt->execute();
 		$stmt->bind_result($_id);
@@ -328,9 +328,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 	
 	function verificaTokenPass($user_id, $token){
 		
-		global $mysqli;
+		global $conn;
 		
-		$stmt = $mysqli->prepare("SELECT activacion FROM usuarios WHERE id = ? AND token_password = ? AND password_request = 1 LIMIT 1");
+		$stmt = $conn->prepare("SELECT activacion FROM usuarios WHERE id = ? AND token_password = ? AND password_request = 1 LIMIT 1");
 		$stmt->bind_param('is', $user_id, $token);
 		$stmt->execute();
 		$stmt->store_result();
@@ -357,9 +357,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 	
 	function cambiaPassword($password, $user_id, $token){
 		
-		global $mysqli;
+		global $conn;
 		
-		$stmt = $mysqli->prepare("UPDATE usuarios SET password = ?, token_password='', password_request=0 WHERE id = ? AND token_password = ?");
+		$stmt = $conn->prepare("UPDATE usuarios SET password = ?, token_password='', password_request=0 WHERE id = ? AND token_password = ?");
 		$stmt->bind_param('sis', $password, $user_id, $token);
 		
 		if($stmt->execute()){

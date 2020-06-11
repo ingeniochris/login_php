@@ -12,12 +12,12 @@
 	
 	if(!empty($_POST))
 	{
-		$nombre = $mysqli->real_escape_string($_POST['nombre']);	
-		$usuario = $mysqli->real_escape_string($_POST['usuario']);	
-		$password = $mysqli->real_escape_string($_POST['password']);	
-		$con_password = $mysqli->real_escape_string($_POST['con_password']);	
-		$email = $mysqli->real_escape_string($_POST['email']);	
-		$captcha = $mysqli->real_escape_string($_POST['g-recaptcha-response']);
+		$nombre = $conn->real_escape_string($_POST['nombre']);	
+		$usuario = $conn->real_escape_string($_POST['usuario']);	
+		$password = $conn->real_escape_string($_POST['password']);	
+		$con_password = $conn->real_escape_string($_POST['con_password']);	
+		$email = $conn->real_escape_string($_POST['email']);	
+		$captcha = $conn->real_escape_string($_POST['g-recaptcha-response']);
 		
 		$activo = 0;
 		//$tipo_usuario = $_ENV['TIPO_DE_USUARIO']; 

@@ -11,8 +11,8 @@
 		header('Location: index.php');
 	}
 	
-	$user_id = $mysqli->real_escape_string($_GET['user_id']);
-	$token = $mysqli->real_escape_string($_GET['token']);
+	$user_id = $conn->real_escape_string($_GET['user_id']);
+	$token = $conn->real_escape_string($_GET['token']);
 	
 	if(!verificaTokenPass($user_id, $token))
 	{

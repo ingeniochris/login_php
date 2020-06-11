@@ -6,7 +6,7 @@ require 'funcs/funcs.php';
 	if(!empty($_POST))
 	{
 		
-		$email = $mysqli->real_escape_string($_POST['email']);
+		$email = $conn->real_escape_string($_POST['email']);
 
 		if(!isEmail($email))
 		{
