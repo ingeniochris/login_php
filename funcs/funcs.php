@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 use PHPMailer\PHPMailer\PHPMailer;
 	
 	function isNull($nombre, $user, $pass, $pass_con, $email){
